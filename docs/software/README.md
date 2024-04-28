@@ -22,13 +22,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
--- Schema sakila
+-- Schema DB-lab-IO-26
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema sakila
+-- Schema DB-lab-IO-26
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `sakila` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `DB-lab-IO-26` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `mydb` ;
 
 -- -----------------------------------------------------
@@ -199,12 +199,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`projects_members` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-USE `sakila` ;
+USE `DB-lab-IO-26` ;
 
 -- -----------------------------------------------------
--- Table `sakila`.`actor`
+-- Table `DB-lab-IO-26`.`actor`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`actor` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`actor` (
   `actor_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
@@ -218,9 +218,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`country`
+-- Table `DB-lab-IO-26`.`country`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`country` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`country` (
   `country_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `country` VARCHAR(50) NOT NULL,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -232,9 +232,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`city`
+-- Table `DB-lab-IO-26`.`city`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`city` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`city` (
   `city_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `city` VARCHAR(50) NOT NULL,
   `country_id` SMALLINT UNSIGNED NOT NULL,
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `sakila`.`city` (
   INDEX `idx_fk_country_id` (`country_id` ASC) VISIBLE,
   CONSTRAINT `fk_city_country`
     FOREIGN KEY (`country_id`)
-    REFERENCES `sakila`.`country` (`country_id`)
+    REFERENCES `DB-lab-IO-26`.`country` (`country_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -253,9 +253,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`address`
+-- Table `DB-lab-IO-26`.`address`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`address` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`address` (
   `address_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `address` VARCHAR(50) NOT NULL,
   `address2` VARCHAR(50) NULL DEFAULT NULL,
@@ -270,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `sakila`.`address` (
   SPATIAL INDEX `idx_location` (`location`) VISIBLE,
   CONSTRAINT `fk_address_city`
     FOREIGN KEY (`city_id`)
-    REFERENCES `sakila`.`city` (`city_id`)
+    REFERENCES `DB-lab-IO-26`.`city` (`city_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -280,9 +280,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`category`
+-- Table `DB-lab-IO-26`.`category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`category` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`category` (
   `category_id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(25) NOT NULL,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -294,9 +294,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`staff`
+-- Table `DB-lab-IO-26`.`staff`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`staff` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`staff` (
   `staff_id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
@@ -313,12 +313,12 @@ CREATE TABLE IF NOT EXISTS `sakila`.`staff` (
   INDEX `idx_fk_address_id` (`address_id` ASC) VISIBLE,
   CONSTRAINT `fk_staff_address`
     FOREIGN KEY (`address_id`)
-    REFERENCES `sakila`.`address` (`address_id`)
+    REFERENCES `DB-lab-IO-26`.`address` (`address_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_staff_store`
     FOREIGN KEY (`store_id`)
-    REFERENCES `sakila`.`store` (`store_id`)
+    REFERENCES `DB-lab-IO-26`.`store` (`store_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -328,9 +328,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`store`
+-- Table `DB-lab-IO-26`.`store`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`store` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`store` (
   `store_id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `manager_staff_id` TINYINT UNSIGNED NOT NULL,
   `address_id` SMALLINT UNSIGNED NOT NULL,
@@ -340,12 +340,12 @@ CREATE TABLE IF NOT EXISTS `sakila`.`store` (
   INDEX `idx_fk_address_id` (`address_id` ASC) VISIBLE,
   CONSTRAINT `fk_store_address`
     FOREIGN KEY (`address_id`)
-    REFERENCES `sakila`.`address` (`address_id`)
+    REFERENCES `DB-lab-IO-26`.`address` (`address_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_store_staff`
     FOREIGN KEY (`manager_staff_id`)
-    REFERENCES `sakila`.`staff` (`staff_id`)
+    REFERENCES `DB-lab-IO-26`.`staff` (`staff_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -355,9 +355,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`customer`
+-- Table `DB-lab-IO-26`.`customer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`customer` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`customer` (
   `customer_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `store_id` TINYINT UNSIGNED NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
@@ -373,12 +373,12 @@ CREATE TABLE IF NOT EXISTS `sakila`.`customer` (
   INDEX `idx_last_name` (`last_name` ASC) VISIBLE,
   CONSTRAINT `fk_customer_address`
     FOREIGN KEY (`address_id`)
-    REFERENCES `sakila`.`address` (`address_id`)
+    REFERENCES `DB-lab-IO-26`.`address` (`address_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_customer_store`
     FOREIGN KEY (`store_id`)
-    REFERENCES `sakila`.`store` (`store_id`)
+    REFERENCES `DB-lab-IO-26`.`store` (`store_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -388,9 +388,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`language`
+-- Table `DB-lab-IO-26`.`language`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`language` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`language` (
   `language_id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` CHAR(20) NOT NULL,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -402,9 +402,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`film`
+-- Table `DB-lab-IO-26`.`film`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`film` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`film` (
   `film_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(128) NOT NULL,
   `description` TEXT NULL DEFAULT NULL,
@@ -424,12 +424,12 @@ CREATE TABLE IF NOT EXISTS `sakila`.`film` (
   INDEX `idx_fk_original_language_id` (`original_language_id` ASC) VISIBLE,
   CONSTRAINT `fk_film_language`
     FOREIGN KEY (`language_id`)
-    REFERENCES `sakila`.`language` (`language_id`)
+    REFERENCES `DB-lab-IO-26`.`language` (`language_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_film_language_original`
     FOREIGN KEY (`original_language_id`)
-    REFERENCES `sakila`.`language` (`language_id`)
+    REFERENCES `DB-lab-IO-26`.`language` (`language_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -439,9 +439,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`film_actor`
+-- Table `DB-lab-IO-26`.`film_actor`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`film_actor` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`film_actor` (
   `actor_id` SMALLINT UNSIGNED NOT NULL,
   `film_id` SMALLINT UNSIGNED NOT NULL,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -449,12 +449,12 @@ CREATE TABLE IF NOT EXISTS `sakila`.`film_actor` (
   INDEX `idx_fk_film_id` (`film_id` ASC) VISIBLE,
   CONSTRAINT `fk_film_actor_actor`
     FOREIGN KEY (`actor_id`)
-    REFERENCES `sakila`.`actor` (`actor_id`)
+    REFERENCES `DB-lab-IO-26`.`actor` (`actor_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_film_actor_film`
     FOREIGN KEY (`film_id`)
-    REFERENCES `sakila`.`film` (`film_id`)
+    REFERENCES `DB-lab-IO-26`.`film` (`film_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -463,9 +463,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`film_category`
+-- Table `DB-lab-IO-26`.`film_category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`film_category` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`film_category` (
   `film_id` SMALLINT UNSIGNED NOT NULL,
   `category_id` TINYINT UNSIGNED NOT NULL,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -473,12 +473,12 @@ CREATE TABLE IF NOT EXISTS `sakila`.`film_category` (
   INDEX `fk_film_category_category` (`category_id` ASC) VISIBLE,
   CONSTRAINT `fk_film_category_category`
     FOREIGN KEY (`category_id`)
-    REFERENCES `sakila`.`category` (`category_id`)
+    REFERENCES `DB-lab-IO-26`.`category` (`category_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_film_category_film`
     FOREIGN KEY (`film_id`)
-    REFERENCES `sakila`.`film` (`film_id`)
+    REFERENCES `DB-lab-IO-26`.`film` (`film_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -487,9 +487,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`film_text`
+-- Table `DB-lab-IO-26`.`film_text`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`film_text` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`film_text` (
   `film_id` SMALLINT NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT NULL DEFAULT NULL,
@@ -501,9 +501,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`inventory`
+-- Table `DB-lab-IO-26`.`inventory`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`inventory` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`inventory` (
   `inventory_id` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `film_id` SMALLINT UNSIGNED NOT NULL,
   `store_id` TINYINT UNSIGNED NOT NULL,
@@ -513,12 +513,12 @@ CREATE TABLE IF NOT EXISTS `sakila`.`inventory` (
   INDEX `idx_store_id_film_id` (`store_id` ASC, `film_id` ASC) VISIBLE,
   CONSTRAINT `fk_inventory_film`
     FOREIGN KEY (`film_id`)
-    REFERENCES `sakila`.`film` (`film_id`)
+    REFERENCES `DB-lab-IO-26`.`film` (`film_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_inventory_store`
     FOREIGN KEY (`store_id`)
-    REFERENCES `sakila`.`store` (`store_id`)
+    REFERENCES `DB-lab-IO-26`.`store` (`store_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -528,9 +528,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`rental`
+-- Table `DB-lab-IO-26`.`rental`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`rental` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`rental` (
   `rental_id` INT NOT NULL AUTO_INCREMENT,
   `rental_date` DATETIME NOT NULL,
   `inventory_id` MEDIUMINT UNSIGNED NOT NULL,
@@ -545,17 +545,17 @@ CREATE TABLE IF NOT EXISTS `sakila`.`rental` (
   INDEX `idx_fk_staff_id` (`staff_id` ASC) VISIBLE,
   CONSTRAINT `fk_rental_customer`
     FOREIGN KEY (`customer_id`)
-    REFERENCES `sakila`.`customer` (`customer_id`)
+    REFERENCES `DB-lab-IO-26`.`customer` (`customer_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_rental_inventory`
     FOREIGN KEY (`inventory_id`)
-    REFERENCES `sakila`.`inventory` (`inventory_id`)
+    REFERENCES `DB-lab-IO-26`.`inventory` (`inventory_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_rental_staff`
     FOREIGN KEY (`staff_id`)
-    REFERENCES `sakila`.`staff` (`staff_id`)
+    REFERENCES `DB-lab-IO-26`.`staff` (`staff_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -565,9 +565,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `sakila`.`payment`
+-- Table `DB-lab-IO-26`.`payment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`payment` (
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`payment` (
   `payment_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `customer_id` SMALLINT UNSIGNED NOT NULL,
   `staff_id` TINYINT UNSIGNED NOT NULL,
@@ -581,17 +581,17 @@ CREATE TABLE IF NOT EXISTS `sakila`.`payment` (
   INDEX `fk_payment_rental` (`rental_id` ASC) VISIBLE,
   CONSTRAINT `fk_payment_customer`
     FOREIGN KEY (`customer_id`)
-    REFERENCES `sakila`.`customer` (`customer_id`)
+    REFERENCES `DB-lab-IO-26`.`customer` (`customer_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `fk_payment_rental`
     FOREIGN KEY (`rental_id`)
-    REFERENCES `sakila`.`rental` (`rental_id`)
+    REFERENCES `DB-lab-IO-26`.`rental` (`rental_id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `fk_payment_staff`
     FOREIGN KEY (`staff_id`)
-    REFERENCES `sakila`.`staff` (`staff_id`)
+    REFERENCES `DB-lab-IO-26`.`staff` (`staff_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -599,49 +599,49 @@ AUTO_INCREMENT = 16050
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-USE `sakila` ;
+USE `DB-lab-IO-26` ;
 
 -- -----------------------------------------------------
--- Placeholder table for view `sakila`.`actor_info`
+-- Placeholder table for view `DB-lab-IO-26`.`actor_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`actor_info` (`actor_id` INT, `first_name` INT, `last_name` INT, `film_info` INT);
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`actor_info` (`actor_id` INT, `first_name` INT, `last_name` INT, `film_info` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `sakila`.`customer_list`
+-- Placeholder table for view `DB-lab-IO-26`.`customer_list`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`customer_list` (`id` INT);
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`customer_list` (`id` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `sakila`.`film_list`
+-- Placeholder table for view `DB-lab-IO-26`.`film_list`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`film_list` (`FID` INT, `title` INT, `description` INT, `category` INT, `price` INT, `length` INT, `rating` INT, `actors` INT);
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`film_list` (`FID` INT, `title` INT, `description` INT, `category` INT, `price` INT, `length` INT, `rating` INT, `actors` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `sakila`.`nicer_but_slower_film_list`
+-- Placeholder table for view `DB-lab-IO-26`.`nicer_but_slower_film_list`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`nicer_but_slower_film_list` (`FID` INT, `title` INT, `description` INT, `category` INT, `price` INT, `length` INT, `rating` INT, `actors` INT);
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`nicer_but_slower_film_list` (`FID` INT, `title` INT, `description` INT, `category` INT, `price` INT, `length` INT, `rating` INT, `actors` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `sakila`.`sales_by_film_category`
+-- Placeholder table for view `DB-lab-IO-26`.`sales_by_film_category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`sales_by_film_category` (`category` INT, `total_sales` INT);
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`sales_by_film_category` (`category` INT, `total_sales` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `sakila`.`sales_by_store`
+-- Placeholder table for view `DB-lab-IO-26`.`sales_by_store`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`sales_by_store` (`store` INT, `manager` INT, `total_sales` INT);
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`sales_by_store` (`store` INT, `manager` INT, `total_sales` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `sakila`.`staff_list`
+-- Placeholder table for view `DB-lab-IO-26`.`staff_list`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sakila`.`staff_list` (`ID` INT, `name` INT, `address` INT, `zip code` INT, `phone` INT, `city` INT, `country` INT, `SID` INT);
+CREATE TABLE IF NOT EXISTS `DB-lab-IO-26`.`staff_list` (`ID` INT, `name` INT, `address` INT, `zip code` INT, `phone` INT, `city` INT, `country` INT, `SID` INT);
 
 -- -----------------------------------------------------
 -- procedure film_in_stock
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `film_in_stock`(IN p_film_id INT, IN p_store_id INT, OUT p_film_count INT)
     READS SQL DATA
 BEGIN
@@ -666,7 +666,7 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `film_not_in_stock`(IN p_film_id INT, IN p_store_id INT, OUT p_film_count INT)
     READS SQL DATA
 BEGIN
@@ -691,7 +691,7 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `get_customer_balance`(p_customer_id INT, p_effective_date DATETIME) RETURNS decimal(5,2)
     READS SQL DATA
     DETERMINISTIC
@@ -740,7 +740,7 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `inventory_held_by_customer`(p_inventory_id INT) RETURNS int
     READS SQL DATA
 BEGIN
@@ -762,7 +762,7 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `inventory_in_stock`(p_inventory_id INT) RETURNS tinyint(1)
     READS SQL DATA
 BEGIN
@@ -799,7 +799,7 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `rewards_report`(
     IN min_monthly_purchases TINYINT UNSIGNED
     , IN min_dollar_amount_purchased DECIMAL(10,2)
@@ -863,90 +863,90 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
--- View `sakila`.`actor_info`
+-- View `DB-lab-IO-26`.`actor_info`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sakila`.`actor_info`;
-USE `sakila`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY INVOKER VIEW `sakila`.`actor_info` AS select `a`.`actor_id` AS `actor_id`,`a`.`first_name` AS `first_name`,`a`.`last_name` AS `last_name`,group_concat(distinct concat(`c`.`name`,': ',(select group_concat(`f`.`title` order by `f`.`title` ASC separator ', ') from ((`sakila`.`film` `f` join `sakila`.`film_category` `fc` on((`f`.`film_id` = `fc`.`film_id`))) join `sakila`.`film_actor` `fa` on((`f`.`film_id` = `fa`.`film_id`))) where ((`fc`.`category_id` = `c`.`category_id`) and (`fa`.`actor_id` = `a`.`actor_id`)))) order by `c`.`name` ASC separator '; ') AS `film_info` from (((`sakila`.`actor` `a` left join `sakila`.`film_actor` `fa` on((`a`.`actor_id` = `fa`.`actor_id`))) left join `sakila`.`film_category` `fc` on((`fa`.`film_id` = `fc`.`film_id`))) left join `sakila`.`category` `c` on((`fc`.`category_id` = `c`.`category_id`))) group by `a`.`actor_id`,`a`.`first_name`,`a`.`last_name`;
+DROP TABLE IF EXISTS `DB-lab-IO-26`.`actor_info`;
+USE `DB-lab-IO-26`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY INVOKER VIEW `DB-lab-IO-26`.`actor_info` AS select `a`.`actor_id` AS `actor_id`,`a`.`first_name` AS `first_name`,`a`.`last_name` AS `last_name`,group_concat(distinct concat(`c`.`name`,': ',(select group_concat(`f`.`title` order by `f`.`title` ASC separator ', ') from ((`DB-lab-IO-26`.`film` `f` join `DB-lab-IO-26`.`film_category` `fc` on((`f`.`film_id` = `fc`.`film_id`))) join `DB-lab-IO-26`.`film_actor` `fa` on((`f`.`film_id` = `fa`.`film_id`))) where ((`fc`.`category_id` = `c`.`category_id`) and (`fa`.`actor_id` = `a`.`actor_id`)))) order by `c`.`name` ASC separator '; ') AS `film_info` from (((`DB-lab-IO-26`.`actor` `a` left join `DB-lab-IO-26`.`film_actor` `fa` on((`a`.`actor_id` = `fa`.`actor_id`))) left join `DB-lab-IO-26`.`film_category` `fc` on((`fa`.`film_id` = `fc`.`film_id`))) left join `DB-lab-IO-26`.`category` `c` on((`fc`.`category_id` = `c`.`category_id`))) group by `a`.`actor_id`,`a`.`first_name`,`a`.`last_name`;
 
 -- -----------------------------------------------------
--- View `sakila`.`customer_list`
+-- View `DB-lab-IO-26`.`customer_list`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sakila`.`customer_list`;
-USE `sakila`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sakila`.`customer_list` AS select `cu`.`customer_id` AS `ID`,concat(`cu`.`first_name`,_utf8mb4' ',`cu`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`sakila`.`city`.`city` AS `city`,`sakila`.`country`.`country` AS `country`,if(`cu`.`active`,_utf8mb4'active',_utf8mb4'') AS `notes`,`cu`.`store_id` AS `SID` from (((`sakila`.`customer` `cu` join `sakila`.`address` `a` on((`cu`.`address_id` = `a`.`address_id`))) join `sakila`.`city` on((`a`.`city_id` = `sakila`.`city`.`city_id`))) join `sakila`.`country` on((`sakila`.`city`.`country_id` = `sakila`.`country`.`country_id`)));
+DROP TABLE IF EXISTS `DB-lab-IO-26`.`customer_list`;
+USE `DB-lab-IO-26`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `DB-lab-IO-26`.`customer_list` AS select `cu`.`customer_id` AS `ID`,concat(`cu`.`first_name`,_utf8mb4' ',`cu`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`DB-lab-IO-26`.`city`.`city` AS `city`,`DB-lab-IO-26`.`country`.`country` AS `country`,if(`cu`.`active`,_utf8mb4'active',_utf8mb4'') AS `notes`,`cu`.`store_id` AS `SID` from (((`DB-lab-IO-26`.`customer` `cu` join `DB-lab-IO-26`.`address` `a` on((`cu`.`address_id` = `a`.`address_id`))) join `DB-lab-IO-26`.`city` on((`a`.`city_id` = `DB-lab-IO-26`.`city`.`city_id`))) join `DB-lab-IO-26`.`country` on((`DB-lab-IO-26`.`city`.`country_id` = `DB-lab-IO-26`.`country`.`country_id`)));
 
 -- -----------------------------------------------------
--- View `sakila`.`film_list`
+-- View `DB-lab-IO-26`.`film_list`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sakila`.`film_list`;
-USE `sakila`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sakila`.`film_list` AS select `sakila`.`film`.`film_id` AS `FID`,`sakila`.`film`.`title` AS `title`,`sakila`.`film`.`description` AS `description`,`sakila`.`category`.`name` AS `category`,`sakila`.`film`.`rental_rate` AS `price`,`sakila`.`film`.`length` AS `length`,`sakila`.`film`.`rating` AS `rating`,group_concat(concat(`sakila`.`actor`.`first_name`,_utf8mb4' ',`sakila`.`actor`.`last_name`) separator ', ') AS `actors` from ((((`sakila`.`category` left join `sakila`.`film_category` on((`sakila`.`category`.`category_id` = `sakila`.`film_category`.`category_id`))) left join `sakila`.`film` on((`sakila`.`film_category`.`film_id` = `sakila`.`film`.`film_id`))) join `sakila`.`film_actor` on((`sakila`.`film`.`film_id` = `sakila`.`film_actor`.`film_id`))) join `sakila`.`actor` on((`sakila`.`film_actor`.`actor_id` = `sakila`.`actor`.`actor_id`))) group by `sakila`.`film`.`film_id`,`sakila`.`category`.`name`;
+DROP TABLE IF EXISTS `DB-lab-IO-26`.`film_list`;
+USE `DB-lab-IO-26`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `DB-lab-IO-26`.`film_list` AS select `DB-lab-IO-26`.`film`.`film_id` AS `FID`,`DB-lab-IO-26`.`film`.`title` AS `title`,`DB-lab-IO-26`.`film`.`description` AS `description`,`DB-lab-IO-26`.`category`.`name` AS `category`,`DB-lab-IO-26`.`film`.`rental_rate` AS `price`,`DB-lab-IO-26`.`film`.`length` AS `length`,`DB-lab-IO-26`.`film`.`rating` AS `rating`,group_concat(concat(`DB-lab-IO-26`.`actor`.`first_name`,_utf8mb4' ',`DB-lab-IO-26`.`actor`.`last_name`) separator ', ') AS `actors` from ((((`DB-lab-IO-26`.`category` left join `DB-lab-IO-26`.`film_category` on((`DB-lab-IO-26`.`category`.`category_id` = `DB-lab-IO-26`.`film_category`.`category_id`))) left join `DB-lab-IO-26`.`film` on((`DB-lab-IO-26`.`film_category`.`film_id` = `DB-lab-IO-26`.`film`.`film_id`))) join `DB-lab-IO-26`.`film_actor` on((`DB-lab-IO-26`.`film`.`film_id` = `DB-lab-IO-26`.`film_actor`.`film_id`))) join `DB-lab-IO-26`.`actor` on((`DB-lab-IO-26`.`film_actor`.`actor_id` = `DB-lab-IO-26`.`actor`.`actor_id`))) group by `DB-lab-IO-26`.`film`.`film_id`,`DB-lab-IO-26`.`category`.`name`;
 
 -- -----------------------------------------------------
--- View `sakila`.`nicer_but_slower_film_list`
+-- View `DB-lab-IO-26`.`nicer_but_slower_film_list`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sakila`.`nicer_but_slower_film_list`;
-USE `sakila`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sakila`.`nicer_but_slower_film_list` AS select `sakila`.`film`.`film_id` AS `FID`,`sakila`.`film`.`title` AS `title`,`sakila`.`film`.`description` AS `description`,`sakila`.`category`.`name` AS `category`,`sakila`.`film`.`rental_rate` AS `price`,`sakila`.`film`.`length` AS `length`,`sakila`.`film`.`rating` AS `rating`,group_concat(concat(concat(upper(substr(`sakila`.`actor`.`first_name`,1,1)),lower(substr(`sakila`.`actor`.`first_name`,2,length(`sakila`.`actor`.`first_name`))),_utf8mb4' ',concat(upper(substr(`sakila`.`actor`.`last_name`,1,1)),lower(substr(`sakila`.`actor`.`last_name`,2,length(`sakila`.`actor`.`last_name`)))))) separator ', ') AS `actors` from ((((`sakila`.`category` left join `sakila`.`film_category` on((`sakila`.`category`.`category_id` = `sakila`.`film_category`.`category_id`))) left join `sakila`.`film` on((`sakila`.`film_category`.`film_id` = `sakila`.`film`.`film_id`))) join `sakila`.`film_actor` on((`sakila`.`film`.`film_id` = `sakila`.`film_actor`.`film_id`))) join `sakila`.`actor` on((`sakila`.`film_actor`.`actor_id` = `sakila`.`actor`.`actor_id`))) group by `sakila`.`film`.`film_id`,`sakila`.`category`.`name`;
+DROP TABLE IF EXISTS `DB-lab-IO-26`.`nicer_but_slower_film_list`;
+USE `DB-lab-IO-26`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `DB-lab-IO-26`.`nicer_but_slower_film_list` AS select `DB-lab-IO-26`.`film`.`film_id` AS `FID`,`DB-lab-IO-26`.`film`.`title` AS `title`,`DB-lab-IO-26`.`film`.`description` AS `description`,`DB-lab-IO-26`.`category`.`name` AS `category`,`DB-lab-IO-26`.`film`.`rental_rate` AS `price`,`DB-lab-IO-26`.`film`.`length` AS `length`,`DB-lab-IO-26`.`film`.`rating` AS `rating`,group_concat(concat(concat(upper(substr(`DB-lab-IO-26`.`actor`.`first_name`,1,1)),lower(substr(`DB-lab-IO-26`.`actor`.`first_name`,2,length(`DB-lab-IO-26`.`actor`.`first_name`))),_utf8mb4' ',concat(upper(substr(`DB-lab-IO-26`.`actor`.`last_name`,1,1)),lower(substr(`DB-lab-IO-26`.`actor`.`last_name`,2,length(`DB-lab-IO-26`.`actor`.`last_name`)))))) separator ', ') AS `actors` from ((((`DB-lab-IO-26`.`category` left join `DB-lab-IO-26`.`film_category` on((`DB-lab-IO-26`.`category`.`category_id` = `DB-lab-IO-26`.`film_category`.`category_id`))) left join `DB-lab-IO-26`.`film` on((`DB-lab-IO-26`.`film_category`.`film_id` = `DB-lab-IO-26`.`film`.`film_id`))) join `DB-lab-IO-26`.`film_actor` on((`DB-lab-IO-26`.`film`.`film_id` = `DB-lab-IO-26`.`film_actor`.`film_id`))) join `DB-lab-IO-26`.`actor` on((`DB-lab-IO-26`.`film_actor`.`actor_id` = `DB-lab-IO-26`.`actor`.`actor_id`))) group by `DB-lab-IO-26`.`film`.`film_id`,`DB-lab-IO-26`.`category`.`name`;
 
 -- -----------------------------------------------------
--- View `sakila`.`sales_by_film_category`
+-- View `DB-lab-IO-26`.`sales_by_film_category`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sakila`.`sales_by_film_category`;
-USE `sakila`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sakila`.`sales_by_film_category` AS select `c`.`name` AS `category`,sum(`p`.`amount`) AS `total_sales` from (((((`sakila`.`payment` `p` join `sakila`.`rental` `r` on((`p`.`rental_id` = `r`.`rental_id`))) join `sakila`.`inventory` `i` on((`r`.`inventory_id` = `i`.`inventory_id`))) join `sakila`.`film` `f` on((`i`.`film_id` = `f`.`film_id`))) join `sakila`.`film_category` `fc` on((`f`.`film_id` = `fc`.`film_id`))) join `sakila`.`category` `c` on((`fc`.`category_id` = `c`.`category_id`))) group by `c`.`name` order by `total_sales` desc;
+DROP TABLE IF EXISTS `DB-lab-IO-26`.`sales_by_film_category`;
+USE `DB-lab-IO-26`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `DB-lab-IO-26`.`sales_by_film_category` AS select `c`.`name` AS `category`,sum(`p`.`amount`) AS `total_sales` from (((((`DB-lab-IO-26`.`payment` `p` join `DB-lab-IO-26`.`rental` `r` on((`p`.`rental_id` = `r`.`rental_id`))) join `DB-lab-IO-26`.`inventory` `i` on((`r`.`inventory_id` = `i`.`inventory_id`))) join `DB-lab-IO-26`.`film` `f` on((`i`.`film_id` = `f`.`film_id`))) join `DB-lab-IO-26`.`film_category` `fc` on((`f`.`film_id` = `fc`.`film_id`))) join `DB-lab-IO-26`.`category` `c` on((`fc`.`category_id` = `c`.`category_id`))) group by `c`.`name` order by `total_sales` desc;
 
 -- -----------------------------------------------------
--- View `sakila`.`sales_by_store`
+-- View `DB-lab-IO-26`.`sales_by_store`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sakila`.`sales_by_store`;
-USE `sakila`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sakila`.`sales_by_store` AS select concat(`c`.`city`,_utf8mb4',',`cy`.`country`) AS `store`,concat(`m`.`first_name`,_utf8mb4' ',`m`.`last_name`) AS `manager`,sum(`p`.`amount`) AS `total_sales` from (((((((`sakila`.`payment` `p` join `sakila`.`rental` `r` on((`p`.`rental_id` = `r`.`rental_id`))) join `sakila`.`inventory` `i` on((`r`.`inventory_id` = `i`.`inventory_id`))) join `sakila`.`store` `s` on((`i`.`store_id` = `s`.`store_id`))) join `sakila`.`address` `a` on((`s`.`address_id` = `a`.`address_id`))) join `sakila`.`city` `c` on((`a`.`city_id` = `c`.`city_id`))) join `sakila`.`country` `cy` on((`c`.`country_id` = `cy`.`country_id`))) join `sakila`.`staff` `m` on((`s`.`manager_staff_id` = `m`.`staff_id`))) group by `s`.`store_id` order by `cy`.`country`,`c`.`city`;
+DROP TABLE IF EXISTS `DB-lab-IO-26`.`sales_by_store`;
+USE `DB-lab-IO-26`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `DB-lab-IO-26`.`sales_by_store` AS select concat(`c`.`city`,_utf8mb4',',`cy`.`country`) AS `store`,concat(`m`.`first_name`,_utf8mb4' ',`m`.`last_name`) AS `manager`,sum(`p`.`amount`) AS `total_sales` from (((((((`DB-lab-IO-26`.`payment` `p` join `DB-lab-IO-26`.`rental` `r` on((`p`.`rental_id` = `r`.`rental_id`))) join `DB-lab-IO-26`.`inventory` `i` on((`r`.`inventory_id` = `i`.`inventory_id`))) join `DB-lab-IO-26`.`store` `s` on((`i`.`store_id` = `s`.`store_id`))) join `DB-lab-IO-26`.`address` `a` on((`s`.`address_id` = `a`.`address_id`))) join `DB-lab-IO-26`.`city` `c` on((`a`.`city_id` = `c`.`city_id`))) join `DB-lab-IO-26`.`country` `cy` on((`c`.`country_id` = `cy`.`country_id`))) join `DB-lab-IO-26`.`staff` `m` on((`s`.`manager_staff_id` = `m`.`staff_id`))) group by `s`.`store_id` order by `cy`.`country`,`c`.`city`;
 
 -- -----------------------------------------------------
--- View `sakila`.`staff_list`
+-- View `DB-lab-IO-26`.`staff_list`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sakila`.`staff_list`;
-USE `sakila`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sakila`.`staff_list` AS select `s`.`staff_id` AS `ID`,concat(`s`.`first_name`,_utf8mb4' ',`s`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`sakila`.`city`.`city` AS `city`,`sakila`.`country`.`country` AS `country`,`s`.`store_id` AS `SID` from (((`sakila`.`staff` `s` join `sakila`.`address` `a` on((`s`.`address_id` = `a`.`address_id`))) join `sakila`.`city` on((`a`.`city_id` = `sakila`.`city`.`city_id`))) join `sakila`.`country` on((`sakila`.`city`.`country_id` = `sakila`.`country`.`country_id`)));
-USE `sakila`;
+DROP TABLE IF EXISTS `DB-lab-IO-26`.`staff_list`;
+USE `DB-lab-IO-26`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `DB-lab-IO-26`.`staff_list` AS select `s`.`staff_id` AS `ID`,concat(`s`.`first_name`,_utf8mb4' ',`s`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`DB-lab-IO-26`.`city`.`city` AS `city`,`DB-lab-IO-26`.`country`.`country` AS `country`,`s`.`store_id` AS `SID` from (((`DB-lab-IO-26`.`staff` `s` join `DB-lab-IO-26`.`address` `a` on((`s`.`address_id` = `a`.`address_id`))) join `DB-lab-IO-26`.`city` on((`a`.`city_id` = `DB-lab-IO-26`.`city`.`city_id`))) join `DB-lab-IO-26`.`country` on((`DB-lab-IO-26`.`city`.`country_id` = `DB-lab-IO-26`.`country`.`country_id`)));
+USE `DB-lab-IO-26`;
 
 DELIMITER $$
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE
 DEFINER=`root`@`localhost`
-TRIGGER `sakila`.`customer_create_date`
-BEFORE INSERT ON `sakila`.`customer`
+TRIGGER `DB-lab-IO-26`.`customer_create_date`
+BEFORE INSERT ON `DB-lab-IO-26`.`customer`
 FOR EACH ROW
 SET NEW.create_date = NOW()$$
 
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE
 DEFINER=`root`@`localhost`
-TRIGGER `sakila`.`del_film`
-AFTER DELETE ON `sakila`.`film`
+TRIGGER `DB-lab-IO-26`.`del_film`
+AFTER DELETE ON `DB-lab-IO-26`.`film`
 FOR EACH ROW
 BEGIN
     DELETE FROM film_text WHERE film_id = old.film_id;
   END$$
 
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE
 DEFINER=`root`@`localhost`
-TRIGGER `sakila`.`ins_film`
-AFTER INSERT ON `sakila`.`film`
+TRIGGER `DB-lab-IO-26`.`ins_film`
+AFTER INSERT ON `DB-lab-IO-26`.`film`
 FOR EACH ROW
 BEGIN
     INSERT INTO film_text (film_id, title, description)
         VALUES (new.film_id, new.title, new.description);
   END$$
 
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE
 DEFINER=`root`@`localhost`
-TRIGGER `sakila`.`upd_film`
-AFTER UPDATE ON `sakila`.`film`
+TRIGGER `DB-lab-IO-26`.`upd_film`
+AFTER UPDATE ON `DB-lab-IO-26`.`film`
 FOR EACH ROW
 BEGIN
     IF (old.title != new.title) OR (old.description != new.description) OR (old.film_id != new.film_id)
@@ -959,19 +959,19 @@ BEGIN
     END IF;
   END$$
 
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE
 DEFINER=`root`@`localhost`
-TRIGGER `sakila`.`rental_date`
-BEFORE INSERT ON `sakila`.`rental`
+TRIGGER `DB-lab-IO-26`.`rental_date`
+BEFORE INSERT ON `DB-lab-IO-26`.`rental`
 FOR EACH ROW
 SET NEW.rental_date = NOW()$$
 
-USE `sakila`$$
+USE `DB-lab-IO-26`$$
 CREATE
 DEFINER=`root`@`localhost`
-TRIGGER `sakila`.`payment_date`
-BEFORE INSERT ON `sakila`.`payment`
+TRIGGER `DB-lab-IO-26`.`payment_date`
+BEFORE INSERT ON `DB-lab-IO-26`.`payment`
 FOR EACH ROW
 SET NEW.payment_date = NOW()$$
 
